@@ -16,7 +16,7 @@ defineProps({
   >
     <div class="flex flex-col justify-between gap-5 w-full">
       <div>
-        <div class="flex flex-col-reverse md:flex-row items-center gap-2 ">
+        <div class="flex flex-col-reverse md:flex-row items-center gap-2">
           <a v-bind:href="`${link}`" target="_blank" class="font-bold text-3xl text-green-600">{{
             title
           }}</a>

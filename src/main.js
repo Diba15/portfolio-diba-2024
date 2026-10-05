@@ -11,12 +11,12 @@ import Work from '@/pages/Work.vue'
 import NotFound from '@/pages/NotFound.vue'
 
 const router = createRouter({
-  linkActiveClass: "bg-green-600",
+  linkActiveClass: 'bg-green-600',
   history: createWebHistory(),
   routes: [
     {
       path: '/:catchAll(.*)',
-      component: NotFound
+      component: NotFound,
     },
     {
       path: '/',
@@ -29,7 +29,7 @@ const router = createRouter({
     {
       path: '/Work',
       component: Work,
-    }
+    },
   ],
 })
 

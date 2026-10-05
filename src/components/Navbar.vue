@@ -67,7 +67,6 @@ defineOptions({
 </template>
 
 <style scoped>
-
 .animateIcon:hover {
   animation: animateIcon 2s linear infinite;
 }

@@ -1,6 +1,6 @@
 <script setup>
 defineOptions({
-  name: "MainIcon",
+  name: 'MainIcon',
 })
 </script>
 
@@ -8,6 +8,4 @@ defineOptions({
   <h1 class="text-white font-bold">DB</h1>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,7 +1,7 @@
 import http from '@/http-service'
 
 class WorkService {
-  getAll()  {
+  getAll() {
     return http.get('/works')
   }
 
@@ -18,4 +18,4 @@ class WorkService {
   }
 }
 
-export default new WorkService();
+export default new WorkService()

@@ -2,6 +2,7 @@
 defineOptions({
   name: 'customFooter',
 })
+const currentYear = new Date().getFullYear()
 </script>
 
 <template>
@@ -15,17 +16,29 @@ defineOptions({
     </svg>
   </div>
   <footer class="bg-green-600 border-0 flex p-5 text-white align-middle justify-between">
-    <h1 class="font-bold text-center neue">&copy; Copyright 2024</h1>
+    <h1 class="font-bold text-center neue">&copy; Copyright {{ currentYear }}</h1>
     <div class="flex flex-row gap-5">
-      <i
+      <a
+        href="https://www.instagram.com/dimazzbagazz/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
         class="pi pi-instagram text-2xl transition-all duration-300 ease-in-out hover:scale-110 cursor-pointer"
-      ></i>
-      <i
+      ></a>
+      <a
+        href="https://github.com/Diba15"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Github"
         class="pi pi-github text-2xl transition-all duration-300 ease-in-out hover:scale-110 cursor-pointer"
-      ></i>
-      <i
+      ></a>
+      <a
+        href="https://www.linkedin.com/in/dimas-bagas-saputro-b2185373/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Linkedin"
         class="pi pi-linkedin text-2xl transition-all duration-300 ease-in-out hover:scale-110 cursor-pointer"
-      ></i>
+      ></a>
     </div>
   </footer>
 </template>

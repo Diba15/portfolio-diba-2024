@@ -81,9 +81,10 @@ const skills = [
     </div>
 
     <div class="max-w-screen-md mx-auto mt-6">
-      <h1 class="text-2xl font-semibold raleway text-center mb-4">Created with Love <span class="text-red-600">&#10084;</span> </h1>
+      <h1 class="text-2xl font-semibold raleway text-center mb-4">
+        Created with Love <span class="text-red-600">&#10084;</span>
+      </h1>
       <div class="relative inline-flex items-center gap-8 px-12">
-
         <!-- Programming languages/frameworks -->
         <div class="flex flex-wrap justify-center gap-10">
           <div

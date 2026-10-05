@@ -12,13 +12,26 @@ const workExperience = ref([])
 const currentPageWork = ref(1)
 const itemsPerPageWork = ref(3)
 
+const education = ref([])
+const currentPageEdu = ref(1)
+const itemsPerPageEdu = ref(3)
+
+const certificates = ref([])
+const currentPage = ref(1)
+const itemsPerPage = ref(3)
+
 onMounted(async () => {
   try {
-    const response = await WorkService.getAll()
-    workExperience.value = response.data[0]
-    workExperience.value = response.data.flat()
+    const [workRes, eduRes, certRes] = await Promise.all([
+      WorkService.getAll(),
+      StudentService.getAll(),
+      CertificateService.getAll(),
+    ])
+    workExperience.value = Array.isArray(workRes.data) ? workRes.data.flat() : []
+    education.value = Array.isArray(eduRes.data) ? eduRes.data.flat() : []
+    certificates.value = Array.isArray(certRes.data) ? certRes.data.flat() : []
   } catch (error) {
-    console.error('Error fetching work experience:', error)
+    console.error('Error fetching data for about page:', error)
   }
 })
 
@@ -29,7 +42,7 @@ const paginatedWorkExperience = computed(() => {
 })
 
 const totalPagesWork = computed(() => {
-  return Math.ceil(workExperience.value.length / itemsPerPageWork.value)
+  return Math.ceil(workExperience.value.length / itemsPerPageWork.value) || 1
 })
 
 const nextPageWork = () => {
@@ -44,20 +57,6 @@ const prevPageWork = () => {
   }
 }
 
-const education = ref([])
-const currentPageEdu = ref(1)
-const itemsPerPageEdu = ref(3)
-
-onMounted(async () => {
-  try {
-    const response = await StudentService.getAll()
-    education.value = response.data[0]
-    education.value = response.data.flat()
-  } catch (error) {
-    console.error('Error fetching education:', error)
-  }
-})
-
 const paginatedEducation = computed(() => {
   const start = (currentPageEdu.value - 1) * itemsPerPageEdu.value
   const end = start + itemsPerPageEdu.value
@@ -65,7 +64,7 @@ const paginatedEducation = computed(() => {
 })
 
 const totalPagesEdu = computed(() => {
-  return Math.ceil(education.value.length / itemsPerPageEdu.value)
+  return Math.ceil(education.value.length / itemsPerPageEdu.value) || 1
 })
 
 const nextPageEdu = () => {
@@ -80,20 +79,6 @@ const prevPageEdu = () => {
   }
 }
 
-const certificates = ref([])
-const currentPage = ref(1)
-const itemsPerPage = ref(3)
-
-onMounted(async () => {
-  try {
-    const response = await CertificateService.getAll()
-    certificates.value = response.data[0]
-    certificates.value = response.data.flat()
-  } catch (error) {
-    console.error('Error fetching certificate:', error)
-  }
-})
-
 const paginatedCertificates = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value
   const end = start + itemsPerPage.value
@@ -101,7 +86,7 @@ const paginatedCertificates = computed(() => {
 })
 
 const totalPages = computed(() => {
-  return Math.ceil(certificates.value.length / itemsPerPage.value)
+  return Math.ceil(certificates.value.length / itemsPerPage.value) || 1
 })
 
 const nextPage = () => {

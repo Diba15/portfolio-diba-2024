@@ -13,7 +13,7 @@ const projects = ref([])
 onMounted(async () => {
   try {
     const response = await ProjectService.getAll()
-    projects.value = response.data.flat()
+    projects.value = Array.isArray(response.data) ? response.data.flat() : []
   } catch (error) {
     console.error('Error fetching projects:', error)
   }
@@ -30,7 +30,7 @@ const paginatedProjects = computed(() => {
 })
 
 const totalPages = computed(() => {
-  return Math.ceil(projects.value.length / itemsPerPage.value)
+  return Math.ceil(projects.value.length / itemsPerPage.value) || 1
 })
 
 const nextPage = () => {
@@ -47,27 +47,23 @@ const prevPage = () => {
 </script>
 
 <template>
-  <div
-    class="py-5 flex flex-col gap-5 min-h-fit max-w-screen-xl mx-auto px-5 my-5 text-white"
-  >
+  <div class="py-5 flex flex-col gap-5 min-h-fit max-w-screen-xl mx-auto px-5 my-5 text-white">
     <div class="flex justify-between items-center">
       <div>
         <h1 class="font-bold text-3xl">Portfolio</h1>
-        <p class="text-sm text-gray-300">
-          Here are some of my projects that I have worked on.
-        </p>
+        <p class="text-sm text-gray-300">Here are some of my projects that I have worked on.</p>
       </div>
       <div class="flex gap-4 justify-end self-end">
-        <button @click="prevPage" :disabled="currentPage === 1">
+        <button @click="prevPage" :disabled="currentPage <= 1">
           <i class="pi pi-chevron-circle-left"></i>
         </button>
         <span> {{ currentPage }}/{{ totalPages }}</span>
-        <button @click="nextPage" :disabled="currentPage === totalPages">
+        <button @click="nextPage" :disabled="currentPage >= totalPages">
           <i class="pi pi-chevron-circle-right"></i>
         </button>
       </div>
     </div>
-    <hr>
+    <hr />
     <div class="flex flex-col gap-5">
       <div v-if="paginatedProjects.length > 0" class="flex flex-col gap-5">
         <CustomCard
@@ -81,7 +77,12 @@ const prevPage = () => {
           :githubLink="project.githubLink"
           :under_dev="project.under_dev"
         />
-        <p v-if="currentPage === paginatedProjects.length" class="text-center text-sm text-gray-300 mb-10">Stay tuned for more updates!</p>
+        <p
+          v-if="currentPage === totalPages && totalPages > 0"
+          class="text-center text-sm text-gray-300 mb-10"
+        >
+          Stay tuned for more updates!
+        </p>
       </div>
       <div v-else class="flex items-center justify-center">
         <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-green-600"></div>
