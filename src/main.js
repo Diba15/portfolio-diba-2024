@@ -24,10 +24,12 @@ const router = createRouter({
     },
     {
       path: '/About',
+      alias: ['/about'],
       component: About,
     },
     {
       path: '/Work',
+      alias: ['/work'],
       component: Work,
     },
   ],
